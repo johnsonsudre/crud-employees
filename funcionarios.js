@@ -1,4 +1,5 @@
 const { tb_cargos, tb_funcs } = require("./configDB.json");
+
 const init = (connection) => {
   const create = async (data) => {
     const conn = await connection;
@@ -20,7 +21,9 @@ const init = (connection) => {
 
   const listByCargo = async (id_cargo) => {
     const conn = await connection;
-    const [result] = await conn.query(`SELECT * FROM ${tb_funcs} WHERE id_cargo=${id_cargo}`);
+    const [result] = await conn.query(
+      `SELECT * FROM ${tb_funcs} WHERE id_cargo=${id_cargo}`
+    );
     return result;
   };
 

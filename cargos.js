@@ -1,4 +1,5 @@
 const { tb_cargos, tb_funcs } = require("./configDB.json");
+
 const init = (connection) => {
   const create = async (data) => {
     const conn = await connection;
@@ -6,6 +7,7 @@ const init = (connection) => {
   };
 
   const remove = async (id) => {
+    console.log("db id: ", id);
     const conn = await connection;
     await conn.query(
       `DELETE FROM ${tb_cargos} WHERE id=${id} AND id NOT IN (SELECT id_cargo FROM ${tb_funcs}) LIMIT 1`
