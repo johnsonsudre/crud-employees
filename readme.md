@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://johnsonsudre.github.io/crud-employees/">
-    <img src="./assets/logo.png" alt="crud emplyees" width="50%" height="50%">
+    <img src="./assets/logo.jpeg" alt="crud emplyees" width="50%" height="50%">
   </a>
 </p>
 
