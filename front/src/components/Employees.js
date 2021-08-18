@@ -87,7 +87,9 @@ const Employees = () => {
         <Tittle icon="user" tittle="Funcionários" button={true} />
         <Collapse isOpen={formToggle}>
           <Card>
-            <H4>{updating ? "Atualizar funcionário" : "Novo funcionário"}</H4>
+            <H4 bp={"padding-bottom--sm"}>
+              {updating ? "Atualizar funcionário" : "Novo funcionário"}
+            </H4>
             {!positions.length ? (
               <>
                 <H3 color="red">Nenhum cargo cadastrado.</H3>
@@ -97,47 +99,72 @@ const Employees = () => {
               ""
             )}
 
-            <InputGroup
-              value={employee.nome}
-              leftElement={<Icon icon="people" color="#aaa6" />}
-              onChange={(event) => {
-                setEmployee({ ...employee, nome: event.target.value });
-              }}
-              placeholder={updating ? "" : "Novo funcionário ..."}
-            />
-            <div className="bp3-html-select">
-              <select
-                value={employee.id_cargo}
-                // {positions.find((p) => employee.id_cargo === p.id)}
-                onChange={(event) => {
-                  setEmployee({ ...employee, id_cargo: event.target.value });
-                }}
-              >
-                <option value={""}>Escolha o cargo...</option>
-                {positions.map((pos) => {
-                  return (
-                    <option key={pos.id} value={pos.id}>
-                      {pos.descricao}
-                    </option>
-                  );
-                })}
-              </select>
-              <span className="bp3-icon bp3-icon-double-caret-vertical"></span>
+            <div bp={"grid"}>
+              <div bp={"9 padding-bottom--sm"}>
+                <label className="bp3-label .modifier">
+                  Nome
+                  <InputGroup
+                    value={employee.nome}
+                    leftElement={<Icon icon="people" color="#aaa6" />}
+                    onChange={(event) => {
+                      setEmployee({ ...employee, nome: event.target.value });
+                    }}
+                    placeholder={updating ? "" : "Novo funcionário ..."}
+                  />
+                </label>
+              </div>
+
+              <div className="bp3-html-select" bp={"3"}>
+                <label className="bp3-label">
+                  Cargo
+                  <div className="bp3-select">
+                    <select
+                      value={employee.id_cargo}
+                      onChange={(event) => {
+                        setEmployee({
+                          ...employee,
+                          id_cargo: event.target.value,
+                        });
+                      }}
+                    >
+                      <option value={""}>Escolha o cargo...</option>
+                      {positions.map((pos) => {
+                        return (
+                          <option key={pos.id} value={pos.id}>
+                            {pos.descricao}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <span className="bp3-icon bp3-icon-double-caret-vertical"></span>
+                  </div>
+                </label>
+              </div>
+              <div bp={"4"}>
+                <label className="bp3-label">
+                  Data de nascimento
+                  <InputGroup
+                    value={employee.dt_nasc}
+                    leftElement={<Icon icon="time" color="#aaa6" />}
+                    onChange={(event) => {
+                      setEmployee({ ...employee, dt_nasc: event.target.value });
+                    }}
+                  />
+                </label>
+              </div>
+              <div bp={"4"}>
+                <label className="bp3-label">
+                  Salário
+                  <InputGroup
+                    value={employee.salario}
+                    leftElement={<Icon icon="dollar" color="#aaa6" />}
+                    onChange={(event) => {
+                      setEmployee({ ...employee, salario: event.target.value });
+                    }}
+                  />
+                </label>
+              </div>
             </div>
-            <InputGroup
-              value={employee.salario}
-              leftElement={<Icon icon="dollar" color="#aaa6" />}
-              onChange={(event) => {
-                setEmployee({ ...employee, salario: event.target.value });
-              }}
-            />
-            <InputGroup
-              value={employee.dt_nasc}
-              leftElement={<Icon icon="time" color="#aaa6" />}
-              onChange={(event) => {
-                setEmployee({ ...employee, dt_nasc: event.target.value });
-              }}
-            />
           </Card>
           <Card>
             <div
@@ -246,6 +273,7 @@ const Employees = () => {
                             </p>
 
                             <div
+                              bp="grid"
                               style={{
                                 display: "flex",
                                 justifyContent: "flex-end",

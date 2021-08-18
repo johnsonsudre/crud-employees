@@ -1,7 +1,7 @@
 const cors = require("cors");
-const db = require("./db");
-const cargos = require("./cargos")(db);
-const funcionarios = require("./funcionarios")(db);
+const db = require("./db/db");
+const cargos = require("./db/cargos")(db);
+const funcionarios = require("./db/funcionarios")(db);
 const express = require("express");
 const app = express();
 
@@ -13,6 +13,8 @@ const port = 3001;
 app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`);
 });
+
+// CARGOS
 
 app.get("/cargos", async (req, res) => {
   const listCargos = await cargos.listAll();
@@ -38,7 +40,7 @@ app.post("/editCargo", async (req, res) => {
     .then(res.send(await cargos.listAll()));
 });
 
-/* ------------------------------ */
+// FUNCIONARIOS
 
 app.get("/employees", async (req, res) => {
   const listFuncionarios = await funcionarios.listAll();
