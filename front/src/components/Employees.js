@@ -273,7 +273,6 @@ const Employees = () => {
                             </p>
 
                             <div
-                              bp="grid"
                               style={{
                                 display: "flex",
                                 justifyContent: "flex-end",
@@ -291,7 +290,6 @@ const Employees = () => {
                                 icon={"trash"}
                                 text={"Remover"}
                               />
-
                               <Divider />
                               <Button
                                 className={Classes.POPOVER_DISMISS}

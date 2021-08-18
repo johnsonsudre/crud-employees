@@ -39,19 +39,12 @@ const PanelApp = () => {
   dataWagesByPosition.unshift(headerChartWagesByPosition);
 
   const totalPayroll = totalWagesByPositions.reduce((accum, e) => accum + e, 0);
-  // console.log(dataEmployeesWages);
-  // console.log(totalPayroll);
-  // console.log(totalWagesByPositions);
 
   const dataChartEmployees = dataEmployeesWages.map((i) => [
     i.employee,
     i.wage,
   ]);
   dataChartEmployees.unshift(headerChartEmployee);
-
-  //console.log(dataChartEmployees);
-  console.log(dataWagesByPosition);
-  console.log(dataChartEmployees);
 
   return (
     <div className="Container">

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AppContext from "../appContext/context";
 import {
   Intent,
@@ -76,6 +76,71 @@ const Positions = () => {
     setDone(true);
     setFormToggle(false);
     setPositionRemoveModal(false);
+  };
+
+  const PositionRemove = () => {
+    const isAllowed = employees.find((emp) => emp.id_cargo === position.id)
+      ? false
+      : true;
+
+    return (
+      <>
+        <Dialog
+          isOpen={positionRemoveModal}
+          icon="info-sign"
+          title={isAllowed ? "Excluir?" : "Impossível excluir!"}
+        >
+          <Card>
+            <H5>
+              {isAllowed
+                ? `Excluir cargo [${position.descricao}] ?`
+                : `O cargo [${position.descricao}] está associado a um ou mais funcionários.`}
+            </H5>
+            <p>
+              {isAllowed
+                ? "O cargo não poderá ser recuperado. Confirme a exclusão:"
+                : "Altere cargos na opção Funcionários"}
+            </p>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: 15,
+              }}
+            >
+              {isAllowed ? (
+                <>
+                  <Button
+                    intent={Intent.DANGER}
+                    className={Classes.POPOVER_DISMISS}
+                    onClick={() => {
+                      removePosition(position.id);
+                      setPositionRemoveModal(false);
+                      setPosition(positionEmpty);
+                    }}
+                    icon={"trash"}
+                    text={"Remover"}
+                  />
+                  <Divider />
+                </>
+              ) : (
+                <></>
+              )}
+
+              <Button
+                className={Classes.POPOVER_DISMISS}
+                icon={isAllowed ? "stop" : "undo"}
+                text={isAllowed ? "Cancelar" : "Voltar"}
+                onClick={() => {
+                  setPosition(positionEmpty);
+                  setPositionRemoveModal(false);
+                }}
+              />
+            </div>
+          </Card>
+        </Dialog>
+      </>
+    );
   };
 
   return (
@@ -167,51 +232,7 @@ const Positions = () => {
                             setPositionRemoveModal(true);
                           }}
                         />
-                        <Dialog
-                          isOpen={positionRemoveModal}
-                          icon="info-sign"
-                          title={"Excluir ?"}
-                        >
-                          <Card>
-                            <H5>
-                              Excluir cargo <b>{position.descricao}</b> ?
-                            </H5>
-                            <p>
-                              O cargo não poderá ser recuperado. Confirme a
-                              exclusão:
-                            </p>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "flex-end",
-                                marginTop: 15,
-                              }}
-                            >
-                              <Button
-                                intent={Intent.DANGER}
-                                className={Classes.POPOVER_DISMISS}
-                                onClick={() => {
-                                  removePosition(position.id);
-                                  setPositionRemoveModal(false);
-                                  setPosition(positionEmpty);
-                                }}
-                                icon={"trash"}
-                                text={"Remover"}
-                              />
-
-                              <Divider />
-                              <Button
-                                className={Classes.POPOVER_DISMISS}
-                                icon={"stop"}
-                                text={"Cancelar"}
-                                onClick={() => {
-                                  setPosition(positionEmpty);
-                                  setPositionRemoveModal(false);
-                                }}
-                              />
-                            </div>
-                          </Card>
-                        </Dialog>
+                        <PositionRemove />
                       </td>
                     </tr>
                   );
