@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+|     | ![Caption](../assets/logo.jpeg) |     |
+| --- | :-----------------------------: | --: |
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center"><i>crud employees</i></h1>
+<h3 align="center">A react app test crud.</h3>
 
-## Available Scripts
+|     | <p> . [About](#about) . [Folder Structures](#folder-structures) . [Libraries & Frameworks](#libraries-frameworks) . [Installation & Set Up](#installation-setup) . [Licence](#licence) . </p> |     |
+| --- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | --: |
 
-In the project directory, you can run:
+#### 1. About
 
-### `npm start`
+This is a small project of crud created with nodejs, express, mysql in backend and react, blueprint in frontend.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# ![](../assets/screen-panel.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![](../assets/screen-employees.png)
 
-### `npm test`
+#### 2. Folder Structures
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
++--- front
+     +--- public
+     +--- src
+          +--- AppContext
+          +--- components
+```
 
-### `npm run build`
+##
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### 3. Dev Libraries & Frameworks
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Name                                                    | Description                                                                                                     |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| [React.js](https://reactjs.org/)                        | React.js is a free and open-source front-end JavaScript library for building user interfaces or UI components.. |
+| [Axios](https://axios-http.com/)                        | Axios is a promise-based HTTP Client for node.js and the browser.                                               |
+| [Blueprint](https://blueprintjs.com/)                   | Blueprint is an UI toolkit project open source, React-based.                                                    |
+| [XAMPP](https://xampp.com/)                             | XAMPP is a completely free, easy to install Apache distribution containing MariaDB, PHP, and Perl.              |
+| [HeidiSQL](https://www.heidisql.com/)                   | HeidiSQL is free software, and has the aim to be easy to learn.                                                 |
+| [React Google Charts](https://react-google-charts.com/) | React Google Charts is a library to make a different charts, graphs and more analytics explanations.            |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+##
 
-### `npm run eject`
+#### 4. Installation & Set Up
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+\*_Require mySql db._
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+##### - Download & unpack project files
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+##### - Install project dependencies
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+  npm install or yarn install
+```
 
-## Learn More
+##### - Run production mode
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+  npm start or yarn start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### 4. License
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT © [Johnson Sudré](https://github.com/johnsonsudre)
