@@ -1,25 +1,11 @@
-<p align="center">
-  <a href="https://johnsonsudre.github.io/crud-employees/">
-    <img src="./assets/logo.jpeg" alt="crud emplyees" width="50%" height="50%">
-  </a>
-</p>
+|     | ![Caption](./assets/logo.jpeg) |     |
+| --- | :----------------------------: | --: |
 
 <h1 align="center"><i>crud employees</i></h1>
 <h3 align="center">A react app test crud.</h3>
-<p align="center">
-  <br>
-  <a href="#folder-structures">About</a>
-  .
-  <a href="#folder-structures">Folder Structures</a>
-  .
-  <a href="#libraries-frameworks">Libraries & Frameworks</a>
-  .
-  <a href="#installation-setup">Installation & Set Up</a>
-  .
-  <a href="#licence">Licence</a>  
-</p>
 
-##
+|     | . [About](#about) . [Folder Structures](#folder-structures) . [Libraries & Frameworks](#libraries-frameworks) . [Installation & Set Up](#installation-setup) . [Licence](#licence) . |     |
+| --- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | --: |
 
 #### 1. About
 
@@ -58,6 +44,8 @@ This is a small project of crud created with nodejs, express, mysql in backend a
 
 #### 4. Installation & Set Up
 
+##### - Download & unpack project files
+
 ##### - Install project dependencies
 
 ```bash
@@ -77,6 +65,7 @@ This is a small project of crud created with nodejs, express, mysql in backend a
 ##### - Run production mode
 
 ```bash
+  cd front
   npm start or yarn start
 ```
 
