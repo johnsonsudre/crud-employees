@@ -10,7 +10,7 @@ const AppProvider = ({ children }) => {
     salario: 0,
     dt_nasc: "",
   };
-  const positionEmpty = { id: 0, descricao: "" };
+  const positionEmpty = { id: null, descricao: "" };
   const [positions, setPositions] = useState([]);
   const [position, setPosition] = useState(positionEmpty);
   const [employees, setEmployees] = useState([]);
