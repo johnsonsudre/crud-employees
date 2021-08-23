@@ -8,60 +8,58 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 // POSITIONS
 
+const positionsList = () => positions.listAll();
 positions.start();
 employees.start();
 
 app.get("/positions", async (req, res) => {
-  const listPositions = await positions.listAll();
-  res.send(listPositions);
+  res.send(await positionsList());
 });
 
 app.post("/createPosition", async (req, res) => {
   try {
     await positions.create(req.body.description);
-    await res.send(positions.listAll());
-    console.log("created: ", req.body);
+    res.send(await positionsList());
   } catch (err) {
     console.log("err", err);
   }
 });
 
 app.post("/removePosition", async (req, res) => {
-  console.log("remove: ", req.body);
-  await positions.remove(req.body.id).then(res.send(await positions.listAll()));
+  await positions.remove(req.body.id);
+  res.send(await positionsList());
 });
 
 app.post("/editPosition", async (req, res) => {
-  console.log("edit: ", req.body);
-  await positions
-    .update(req.body.id, req.body.description)
-    .then(res.send(await positions.listAll()));
+  await positions.update(req.body.id, req.body.description);
+  res.send(await positionsList());
 });
 
 // EMPLOYEES
 
+const employeesList = () => employees.listAll();
+
 app.get("/employees", async (req, res) => {
-  const listEmployees = await employees.listAll();
-  res.send(listEmployees);
+  res.send(await employeesList());
 });
 
 app.post("/createEmployee", async (req, res) => {
-  console.log("create: ", req.body);
-  await employees.create(req.body).then(res.send(await employees.listAll()));
+  await employees.create(req.body);
+  res.send(await employeesList());
 });
 
 app.post("/removeEmployee", async (req, res) => {
-  await employees.remove(req.body.id).then(res.send(await employees.listAll()));
+  await employees.remove(req.body.id);
+  res.send(await employeesList());
 });
 
 app.post("/editEmployee", async (req, res) => {
-  await employees
-    .update(req.body.id, req.body)
-    .then(res.send(await employees.listAll()));
+  await employees.update(req.body.id, req.body);
+  res.send(await employeesList());
 });
 
 //
@@ -69,12 +67,3 @@ app.post("/editEmployee", async (req, res) => {
 app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`);
 });
-
-// TEST
-//await employees.create(funcionario);
-//await employees.remove(3);
-// console.log(await employees.listAll());
-// await employees.update(4, funcionario);
-//console.log(await employees.listAll());
-// console.log(await employees.listByPosition(2));
-// console.log("end api test");

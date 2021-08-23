@@ -23,7 +23,6 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     setDone(false);
-    console.log("*** provider ***");
     axios.get("http://localhost:3001/positions").then(async (response) => {
       const resp = await response.data;
       console.log(resp);
