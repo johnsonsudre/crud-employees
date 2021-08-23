@@ -1,9 +1,0 @@
-{
-  "tb_funcs": "funcionarios",
-  "tb_cargos": "cargos",
-  "db_config": {
-    "host": "localhost",
-    "user": "root",
-    "database": "gerenc_func"
-  }
-}

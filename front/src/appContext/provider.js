@@ -5,12 +5,13 @@ import axios from "axios";
 const AppProvider = ({ children }) => {
   const employeeEmpty = {
     id: null,
-    nome: "",
-    id_cargo: "",
-    salario: 0,
-    dt_nasc: "",
+    name: "",
+    idPosition: "",
+    wage: 0,
+    dateBirth: "",
   };
-  const positionEmpty = { id: null, descricao: "" };
+  const positionEmpty = { id: null, description: "" };
+
   const [positions, setPositions] = useState([]);
   const [position, setPosition] = useState(positionEmpty);
   const [employees, setEmployees] = useState([]);
@@ -22,8 +23,10 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     setDone(false);
-    axios.get("http://localhost:3001/cargos").then(async (response) => {
+    console.log("*** provider ***");
+    axios.get("http://localhost:3001/positions").then(async (response) => {
       const resp = await response.data;
+      console.log(resp);
       await setPositions(resp);
     });
     axios.get("http://localhost:3001/employees").then(async (response) => {

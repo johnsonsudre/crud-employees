@@ -39,9 +39,9 @@ const Positions = () => {
     setDone(false);
     if (data.id === null) {
       await axios
-        .post("http://localhost:3001/createCargo", data)
+        .post("http://localhost:3001/createPosition", data)
         .then(async () => {
-          axios.get("http://localhost:3001/cargos").then(async (resp) => {
+          axios.get("http://localhost:3001/positions").then(async (resp) => {
             setPositions(resp.data);
             setPosition(positionEmpty);
           });
@@ -51,7 +51,7 @@ const Positions = () => {
         });
     } else {
       const respUpdate = await axios.post(
-        "http://localhost:3001/editCargo",
+        "http://localhost:3001/editPosition",
         data
       );
       setPositions(respUpdate.data);
@@ -63,9 +63,9 @@ const Positions = () => {
   const removePosition = async (id) => {
     setDone(false);
     axios
-      .post("http://localhost:3001/removeCargo", { id: id })
+      .post("http://localhost:3001/removePosition", { id: id })
       .then(async () => {
-        axios.get("http://localhost:3001/cargos").then(async (response) => {
+        axios.get("http://localhost:3001/positions").then(async (response) => {
           const resp = await response.data;
           await setPositions(resp);
         });
@@ -79,7 +79,7 @@ const Positions = () => {
   };
 
   const PositionRemove = () => {
-    const isAllowed = employees.find((emp) => emp.id_cargo === position.id)
+    const isAllowed = employees.find((emp) => emp.idPosition === position.id)
       ? false
       : true;
 
@@ -93,8 +93,8 @@ const Positions = () => {
           <Card>
             <H5>
               {isAllowed
-                ? `Excluir cargo [${position.descricao}] ?`
-                : `O cargo [${position.descricao}] está associado a um ou mais funcionários.`}
+                ? `Excluir cargo [${position.description}] ?`
+                : `O cargo [${position.description}] está associado a um ou mais funcionários.`}
             </H5>
             <p>
               {isAllowed
@@ -151,14 +151,14 @@ const Positions = () => {
           <Card>
             <H4>{updating ? "Atualizar cargo" : "Novo cargo"}</H4>
             <InputGroup
-              value={position.descricao}
+              value={position.description}
               large={true}
               leftElement={<Icon icon="user" color="#aaa6" />}
               rightElement={
                 <>
                   <Button
                     icon="record"
-                    disabled={position.descricao === "" ? true : false}
+                    disabled={position.description === "" ? true : false}
                     text={updating ? "Atualizar" : "Salvar"}
                     intent={updating ? "Success" : "Warning"}
                     onClick={() => {
@@ -180,7 +180,7 @@ const Positions = () => {
                 </>
               }
               onChange={(event) => {
-                setPosition({ ...position, descricao: event.target.value });
+                setPosition({ ...position, description: event.target.value });
               }}
               placeholder={updating ? "" : "Novo cargo ..."}
             />
@@ -205,7 +205,7 @@ const Positions = () => {
                 {positions.map((pos) => {
                   return (
                     <tr bp={"flex"} key={pos.id}>
-                      <td bp={"fill"}>{pos.descricao}</td>
+                      <td bp={"fill"}>{pos.description}</td>
                       <td bp={"fit"}>
                         <Button
                           icon={"edit"}
@@ -214,7 +214,7 @@ const Positions = () => {
                             setFormToggle(true);
                             setPosition({
                               id: pos.id,
-                              descricao: pos.descricao,
+                              description: pos.description,
                             });
                           }}
                         />
@@ -225,7 +225,7 @@ const Positions = () => {
                           onClick={() => {
                             setPosition({
                               id: pos.id,
-                              descricao: pos.descricao,
+                              description: pos.description,
                             });
                             setUpdating(false);
                             setFormToggle(false);

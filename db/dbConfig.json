@@ -1,0 +1,9 @@
+{
+  "tbEmployees": "employees",
+  "tbPositions": "positions",
+  "dbConfig": {
+    "host": "localhost",
+    "user": "root",
+    "database": "employeesmanager"
+  }
+}

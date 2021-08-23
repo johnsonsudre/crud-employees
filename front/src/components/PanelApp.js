@@ -10,20 +10,20 @@ const PanelApp = () => {
 
   const dataWagesByPosition = positions
     .map((pos) => {
-      const empWages = employees.filter((emp) => emp.id_cargo === pos.id);
+      const empWages = employees.filter((emp) => emp.idPosition === pos.id);
       return empWages;
     })
     .filter((emp) => emp.length > 0)
     .map((e) => {
       return [
-        positions.filter((i) => i.id === e[0].id_cargo)[0].descricao,
-        e.reduce((total, i) => total + i.salario, 0),
+        positions.filter((i) => i.id === e[0].idPosition)[0].description,
+        e.reduce((total, i) => total + i.wage, 0),
       ];
     });
 
   const dataEmployeesWages = employees.map((emp) => ({
-    employee: emp.nome,
-    wage: emp.salario,
+    employee: emp.name,
+    wage: emp.wage,
   }));
 
   const headerChartEmployee = ["Nome", "Salário"];
@@ -31,9 +31,9 @@ const PanelApp = () => {
 
   const totalWagesByPositions = positions.map((pos) => {
     const empWages = employees.filter((emp) => {
-      if (emp.id_cargo === pos.id) return emp.salario;
+      if (emp.idPosition === pos.id) return emp.wage;
     });
-    return empWages.reduce((accumulated, emp) => accumulated + emp.salario, 0);
+    return empWages.reduce((accumulated, emp) => accumulated + emp.wage, 0);
   });
 
   dataWagesByPosition.unshift(headerChartWagesByPosition);
@@ -118,11 +118,14 @@ const PanelApp = () => {
                 {employees.map((emp) => {
                   return (
                     <tr key={emp.id}>
-                      <td>{emp.nome}</td>
+                      <td>{emp.name}</td>
                       <td>
-                        {positions.find((p) => p.id === emp.id_cargo).descricao}
+                        {
+                          positions.find((p) => p.id === emp.idPosition)
+                            .description
+                        }
                       </td>
-                      <td>{emp.salario}</td>
+                      <td>{emp.wage}</td>
                     </tr>
                   );
                 })}

@@ -1,76 +1,80 @@
-const cors = require("cors");
-const db = require("./db/db");
-const cargos = require("./db/cargos")(db);
-const funcionarios = require("./db/funcionarios")(db);
 const express = require("express");
-const app = express();
+const cors = require("cors");
+const dbConnection = require("./db/dbConnection");
+const positions = require("./db/positions")(dbConnection);
+const employees = require("./db/employees")(dbConnection);
 
+const app = express();
 app.use(cors());
 app.use(express.json());
 
 const port = 3001;
 
-app.listen(port, () => {
-  console.log(`listening at http://localhost:${port}`);
+// POSITIONS
+
+positions.start();
+employees.start();
+
+app.get("/positions", async (req, res) => {
+  const listPositions = await positions.listAll();
+  res.send(listPositions);
 });
 
-// CARGOS
-
-app.get("/cargos", async (req, res) => {
-  const listCargos = await cargos.listAll();
-  res.send(listCargos);
+app.post("/createPosition", async (req, res) => {
+  try {
+    await positions.create(req.body.description);
+    await res.send(positions.listAll());
+    console.log("created: ", req.body);
+  } catch (err) {
+    console.log("err", err);
+  }
 });
 
-app.post("/createCargo", async (req, res) => {
-  console.log("create: ", req.body);
-  await cargos
-    .create(req.body.descricao)
-    .then(res.send(await cargos.listAll()));
-});
-
-app.post("/removeCargo", async (req, res) => {
+app.post("/removePosition", async (req, res) => {
   console.log("remove: ", req.body);
-  await cargos.remove(req.body.id).then(res.send(await cargos.listAll()));
+  await positions.remove(req.body.id).then(res.send(await positions.listAll()));
 });
 
-app.post("/editCargo", async (req, res) => {
+app.post("/editPosition", async (req, res) => {
   console.log("edit: ", req.body);
-  await cargos
-    .update(req.body.id, req.body.descricao)
-    .then(res.send(await cargos.listAll()));
+  await positions
+    .update(req.body.id, req.body.description)
+    .then(res.send(await positions.listAll()));
 });
 
-// FUNCIONARIOS
+// EMPLOYEES
 
 app.get("/employees", async (req, res) => {
-  const listFuncionarios = await funcionarios.listAll();
-  res.send(listFuncionarios);
+  const listEmployees = await employees.listAll();
+  res.send(listEmployees);
 });
 
 app.post("/createEmployee", async (req, res) => {
   console.log("create: ", req.body);
-  await funcionarios
-    .create(req.body)
-    .then(res.send(await funcionarios.listAll()));
+  await employees.create(req.body).then(res.send(await employees.listAll()));
 });
 
 app.post("/removeEmployee", async (req, res) => {
-  await funcionarios
-    .remove(req.body.id)
-    .then(res.send(await funcionarios.listAll()));
+  await employees.remove(req.body.id).then(res.send(await employees.listAll()));
 });
 
 app.post("/editEmployee", async (req, res) => {
-  await funcionarios
+  await employees
     .update(req.body.id, req.body)
-    .then(res.send(await funcionarios.listAll()));
+    .then(res.send(await employees.listAll()));
 });
 
-// FUNCIONARIOS
-//await funcionarios.create(funcionario);
-//await funcionarios.remove(3);
-// console.log(await funcionarios.listAll());
-// await funcionarios.update(4, funcionario);
-//console.log(await funcionarios.listAll());
-// console.log(await funcionarios.listByCargo(2));
+//
+
+app.listen(port, () => {
+  console.log(`listening at http://localhost:${port}`);
+});
+
+// TEST
+//await employees.create(funcionario);
+//await employees.remove(3);
+// console.log(await employees.listAll());
+// await employees.update(4, funcionario);
+//console.log(await employees.listAll());
+// console.log(await employees.listByPosition(2));
 // console.log("end api test");

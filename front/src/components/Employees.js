@@ -104,10 +104,10 @@ const Employees = () => {
                 <label className="bp3-label .modifier">
                   Nome
                   <InputGroup
-                    value={employee.nome}
+                    value={employee.name}
                     leftElement={<Icon icon="people" color="#aaa6" />}
                     onChange={(event) => {
-                      setEmployee({ ...employee, nome: event.target.value });
+                      setEmployee({ ...employee, name: event.target.value });
                     }}
                     placeholder={updating ? "" : "Novo funcionário ..."}
                   />
@@ -119,11 +119,11 @@ const Employees = () => {
                   Cargo
                   <div className="bp3-select">
                     <select
-                      value={employee.id_cargo}
+                      value={employee.idPosition}
                       onChange={(event) => {
                         setEmployee({
                           ...employee,
-                          id_cargo: event.target.value,
+                          idPosition: event.target.value,
                         });
                       }}
                     >
@@ -131,7 +131,7 @@ const Employees = () => {
                       {positions.map((pos) => {
                         return (
                           <option key={pos.id} value={pos.id}>
-                            {pos.descricao}
+                            {pos.description}
                           </option>
                         );
                       })}
@@ -144,10 +144,10 @@ const Employees = () => {
                 <label className="bp3-label">
                   Data de nascimento
                   <InputGroup
-                    value={employee.dt_nasc}
+                    value={employee.dtBirth}
                     leftElement={<Icon icon="time" color="#aaa6" />}
                     onChange={(event) => {
-                      setEmployee({ ...employee, dt_nasc: event.target.value });
+                      setEmployee({ ...employee, dtBirth: event.target.value });
                     }}
                   />
                 </label>
@@ -156,10 +156,10 @@ const Employees = () => {
                 <label className="bp3-label">
                   Salário
                   <InputGroup
-                    value={employee.salario}
+                    value={employee.wage}
                     leftElement={<Icon icon="dollar" color="#aaa6" />}
                     onChange={(event) => {
-                      setEmployee({ ...employee, salario: event.target.value });
+                      setEmployee({ ...employee, wage: event.target.value });
                     }}
                   />
                 </label>
@@ -176,7 +176,7 @@ const Employees = () => {
             >
               <Button
                 disabled={
-                  employee.nome === "" || employee.id_cargo === ""
+                  employee.name === "" || employee.idPosition === ""
                     ? true
                     : false
                 }
@@ -225,13 +225,16 @@ const Employees = () => {
                 {employees.map((emp) => {
                   return (
                     <tr key={emp.id}>
-                      <td>{emp.nome}</td>
+                      <td>{emp.name}</td>
                       {/* inventory.find( fruit => fruit.name === 'cherries' ); */}
                       <td>
-                        {positions.find((p) => p.id === emp.id_cargo).descricao}
+                        {
+                          positions.find((p) => p.id === emp.idPosition)
+                            .description
+                        }
                       </td>
-                      <td>{emp.salario}</td>
-                      <td>{emp.dt_nasc}</td>
+                      <td>{emp.wage}</td>
+                      <td>{emp.dtBirth}</td>
                       <td>
                         <Button
                           icon={"edit"}
@@ -240,10 +243,10 @@ const Employees = () => {
                             setFormToggle(true);
                             setEmployee({
                               id: emp.id,
-                              nome: emp.nome,
-                              id_cargo: emp.id_cargo,
-                              salario: emp.salario,
-                              dt_nasc: emp.dt_nasc,
+                              name: emp.name,
+                              idPosition: emp.idPosition,
+                              wage: emp.wage,
+                              dtBirth: emp.dtBirth,
                             });
                           }}
                         />
@@ -267,7 +270,7 @@ const Employees = () => {
                             <H5>Confirme exclusão</H5>
                             <p>
                               Tem certeza de que deseja remover{" "}
-                              <b>{employee.descricao}</b>?
+                              <b>{employee.description}</b>?
                               <br />
                               Você não poderá recuperá-lo.
                             </p>
@@ -349,10 +352,10 @@ export default Employees;
 //                 {employees.map((func) => {
 //                   return (
 //                     <tr key={func.id}>
-//                       <td>{func.nome}</td>
-//                       <td>{func.id_cargo}</td>
-//                       <td>{func.salario}</td>
-//                       <td>{func.dt_nasc}</td>
+//                       <td>{func.name}</td>
+//                       <td>{func.idPosition}</td>
+//                       <td>{func.wage}</td>
+//                       <td>{func.dtBirth}</td>
 //                       <td>
 //                         <Icon icon={"edit"} size={16} />
 //                       </td>

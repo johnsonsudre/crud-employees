@@ -44,11 +44,11 @@ const Tittle = (props) => {
                       setEmployee({
                         ...employee,
                         id: null,
-                        id_cargo: "",
-                        nome: "",
+                        idPosition: "",
+                        name: "",
                       });
                   } else {
-                    setPosition({ id: null, descricao: "" });
+                    setPosition({ id: null, descripion: "" });
                   }
                 }}
               />
