@@ -19,7 +19,7 @@ const AppContext = createContext({
   setUpdating: () => {},
   done: true,
   setDone: () => {},
-  employeEmpty: {},
+  employeeEmpty: {},
   positionEmpty: {},
 });
 

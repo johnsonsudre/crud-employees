@@ -1,5 +1,8 @@
 import { useContext, useState } from "react";
 import AppContext from "../appContext/context";
+import DatePicker from "react-datepicker";
+import { format } from "date-fns";
+import "react-datepicker/dist/react-datepicker.css";
 import {
   Intent,
   Button,
@@ -140,16 +143,28 @@ const Employees = () => {
                   </div>
                 </label>
               </div>
+              <div></div>
               <div bp={"4"}>
                 <label className="bp3-label">
                   Data de nascimento
-                  <InputGroup
+                  <div>
+                    <DatePicker
+                      className="bp3-input"
+                      locale="pt-BR"
+                      selected={new Date(employee.dtBirth)}
+                      dateFormat="dd/MM/yyyy"
+                      onChange={(selectedDate) => {
+                        setEmployee({ ...employee, dtBirth: selectedDate });
+                      }}
+                    />
+                  </div>
+                  {/* <InputGroup
                     value={employee.dtBirth}
                     leftElement={<Icon icon="time" color="#aaa6" />}
                     onChange={(event) => {
                       setEmployee({ ...employee, dtBirth: event.target.value });
                     }}
-                  />
+                  /> */}
                 </label>
               </div>
               <div bp={"4"}>
@@ -234,7 +249,7 @@ const Employees = () => {
                         }
                       </td>
                       <td>{emp.wage}</td>
-                      <td>{emp.dtBirth}</td>
+                      <td>{format(new Date(emp.dtBirth), "dd/MM/yyyy")}</td>
                       <td>
                         <Button
                           icon={"edit"}
@@ -319,59 +334,3 @@ const Employees = () => {
 };
 
 export default Employees;
-
-// import { useContext } from "react";
-// import AppContext from "../appContext/context";
-// import { Card, Elevation, Icon } from "@blueprintjs/core";
-// import Tittle from "./Tittle";
-
-// const Employees = () => {
-//   const { employees } = useContext(AppContext);
-//   return (
-//     <div className="Container">
-//       <Card elevation={Elevation.ZERO}>
-//         <Tittle icon="people" tittle="Funcionários" button={true} />
-//         <div bp="grid">
-//           <Card bp="12">
-//             <table className="bp3-html-table bp3-html-table-striped bp3-interactive flex-fill .modifier">
-//               <thead bp="12">
-//                 <tr>
-//                   <th bp="5">Nome</th>
-//                   <th bp="2">Cargo</th>
-//                   <th bp="2">Salário</th>
-//                   <th bp="1">Data Nasc.</th>
-//                   <th bp="1">
-//                     <Icon icon={"edit"} size={16} />
-//                   </th>
-//                   <th bp="1">
-//                     <Icon icon={"trash"} size={16} />
-//                   </th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 {employees.map((func) => {
-//                   return (
-//                     <tr key={func.id}>
-//                       <td>{func.name}</td>
-//                       <td>{func.idPosition}</td>
-//                       <td>{func.wage}</td>
-//                       <td>{func.dtBirth}</td>
-//                       <td>
-//                         <Icon icon={"edit"} size={16} />
-//                       </td>
-//                       <td>
-//                         <Icon icon={"trash"} size={16} />
-//                       </td>
-//                     </tr>
-//                   );
-//                 })}
-//               </tbody>
-//             </table>
-//           </Card>
-//         </div>
-//       </Card>
-//     </div>
-//   );
-// };
-
-// export default Employees;

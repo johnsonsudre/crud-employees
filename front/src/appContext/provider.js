@@ -8,7 +8,7 @@ const AppProvider = ({ children }) => {
     name: "",
     idPosition: "",
     wage: 0,
-    dateBirth: "",
+    dtBirth: new Date(),
   };
   const positionEmpty = { id: null, description: "" };
 
@@ -25,7 +25,6 @@ const AppProvider = ({ children }) => {
     setDone(false);
     axios.get("http://localhost:3001/positions").then(async (response) => {
       const resp = await response.data;
-      console.log(resp);
       await setPositions(resp);
     });
     axios.get("http://localhost:3001/employees").then(async (response) => {
