@@ -1,6 +1,9 @@
 import { useContext, useState } from "react";
 import AppContext from "../appContext/context";
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
+import ptBR from "date-fns/locale/pt-BR";
+registerLocale("ptBR", ptBR);
+
 import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import {
@@ -150,7 +153,13 @@ const Employees = () => {
                   <div>
                     <DatePicker
                       className="bp3-input"
-                      locale="pt-BR"
+                      showYearDropdown
+                      yearDropdownItemNumber={15}
+                      scrollableYearDropdown
+                      peekNextMonth
+                      showMonthDropdown
+                      dropdownMode="select"
+                      locale={ptBR}
                       selected={new Date(employee.dtBirth)}
                       dateFormat="dd/MM/yyyy"
                       onChange={(selectedDate) => {
